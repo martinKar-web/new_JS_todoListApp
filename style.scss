@@ -1,0 +1,232 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: rgb(193, 62, 62);
+  background: linear-gradient(
+    139deg,
+    rgba(193, 62, 62, 1) 0%,
+    rgba(230, 179, 50, 1) 100%
+  );
+  overflow-x: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  height: 100%;
+}
+
+#todos {
+  color: #fff;
+  padding: 1.2rem;
+  width: 600px;
+  margin: 0 auto;
+  height: auto;
+
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
+
+  .heading {
+    margin-bottom: 2rem;
+    text-align: center;
+
+    h1 {
+      display: inline-block;
+      position: relative;
+      text-transform: uppercase;
+      font-size: 2.5rem;
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: 0 auto;
+        width: 10%;
+        height: 2px;
+        background-color: #fff;
+        transition: 0.5s;
+      }
+
+      &:hover::before {
+        width: 80%;
+      }
+    }
+  }
+
+  .todo__inputContainer {
+    width: 100%;
+    text-align: center;
+    position: relative;
+    margin-bottom: 3rem; // ~50px
+
+    .todo-input {
+      width: 100%;
+      height: 40px;
+      padding: 0 0 0 0.7rem;
+      font-size: 1.2rem;
+      outline: none;
+      border: none;
+    }
+
+    .add-item,
+    .deleteBtn {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      background-color: rgb(236, 44, 44);
+      line-height: 40px;
+      color: #fff;
+      cursor: pointer;
+
+      &:nth-child(2) {
+        right: 40px;
+        background-color: rgb(233, 153, 61);
+      }
+    }
+  }
+
+  .todo__listContainer {
+    list-style: none;
+    margin: 10px 0 0 0;
+
+    .todo-list {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+
+      .todo-item {
+        width: 100%;
+        background-color: #fff;
+        color: #212121;
+        height: 40px;
+        line-height: 40px;
+        padding: 0 10px;
+        font-size: 1.2rem;
+      }
+
+      .todo__buttonContainer {
+        position: absolute;
+        right: 0;
+
+        button {
+          width: 40px;
+          height: 50px;
+          border: none;
+          color: #fff;
+          outline: none;
+          cursor: pointer;
+        }
+
+        i {
+          pointer-events: none;
+        }
+
+        .completed {
+          background-color: #3ec282;
+        }
+
+        .editBtn {
+          background-color: rgb(86, 62, 193);
+        }
+
+        .trash {
+          background-color: #e72727;
+        }
+      }
+    }
+  }
+}
+
+.edit-todo {
+  position: fixed;
+  background-color: rgba(33, 33, 33, 0.5);
+  height: 100vh;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s; 
+  z-index: 1;
+
+  .modal {
+    height: 40vh;
+    width: 62vw;
+    background: white;
+    padding: 0 0 0 0;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 2rem;
+    margin-bottom: 5rem;
+    z-index: 5;
+
+    header {
+      margin-bottom: 1rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    input {
+      width: 100%;
+      margin-bottom: 1rem;
+      font-size:1.1rem;
+      height: 35px;
+      width: 400px;
+      border: 1px solid #212121
+    }
+
+    button {
+      margin-bottom: 1rem;
+      padding: 0.8rem;
+      border:none;
+      background-color: lightblue;
+      cursor: pointer;
+    }
+  }
+}
+
+.line-through {
+  text-decoration: line-through;
+  text-decoration-color: #212121;
+  opacity: 0.7;
+  transition: 0.3s;
+}
+
+.slide {
+  opacity: 0 !important;
+  transform: translateX(100px);
+  transition: 0.5s;
+}
+
+.show-modal{
+  visibility: visible;
+  opacity: 1;
+}
+
+.edit-todo#blur.active{
+  filter: blur(20px);
+  pointer-events: none;
+  user-select: none;
+}
